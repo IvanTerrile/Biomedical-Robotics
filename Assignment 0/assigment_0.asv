@@ -88,33 +88,14 @@ title('EEG');
 % or Motion Data.
 % 
 % Regarding EMGs, in the time domain, they are often characterized by high-amplitude peaks, and 
-% in our case, the time-domain plot with the highest amplitude is the first one (related to data1). 
-% A similar rationale applies to the frequency domain, as EMGs are known for featuring higher 
-% frequencies, and the first plot (related to data1) exhibits a greater presence of high 
-% frequencies. Therefore, these initial observations lead us to consider that the first dataset 
-% corresponds to an EMG.
+% in our case, the time-domain plot with the highest amplitude is the first one (related to data1). A similar rationale applies to the frequency domain, as EMGs are known for featuring higher frequencies, and the first plot (related to data1) exhibits a greater presence of high frequencies. Therefore, these initial observations lead us to consider that the first dataset corresponds to an EMG.
 % 
-% Now, let's attempt to associate the second and third plots with EEG and Motion Data to confirm 
-% that the first one is indeed related to an EMG.
+% Now, let's attempt to associate the second and third plots with EEG and Motion Data to confirm that the first one is indeed related to an EMG.
 % 
-% Concerning EEGs, we are aware that they are characterized by specific frequencies, such as alpha 
-% waves (8-12 Hz) and delta waves (1-4 Hz). However, without conducting further analyses, it is 
-% challenging to identify these specific frequency components. Another consideration might involve 
-% examining peaks at different frequencies in the frequency domain plots, but the obtained graph 
-% is not suitable for this type of analysis.
+% Concerning EEGs, we are aware that they are characterized by specific frequencies, such as alpha waves (8-12 Hz) and delta waves (1-4 Hz). However, without conducting further analyses, it is challenging to identify these specific frequency components. Another consideration might involve examining peaks at different frequencies in the frequency domain plots, but the obtained graph is not suitable for this type of analysis.
 % 
-% As a result, at this stage, we are uncertain about which of the remaining two datasets 
-% represents an EEG and which one represents Motion Data. Let's now focus on considerations 
-% related to Motion Data to determine the corresponding plot.
+% As a result, at this stage, we are uncertain about which of the remaining two datasets represents an EEG and which one represents Motion Data. Let's now focus on considerations related to Motion Data to determine the corresponding plot.
 % 
-% For Motion Data, we know that, in the time domain, they usually exhibit regular and continuous 
-% variations over time. For instance, there may be constant oscillations. In the frequency domain, 
-% they may contain components at different frequencies, depending on the recorded motion. These 
-% considerations, especially the first one, lead us to believe that the second dataset corresponds 
-% to Motion Data.
+% For Motion Data, we know that, in the time domain, they usually exhibit regular and continuous variations over time. For instance, there may be constant oscillations. In the frequency domain, they may contain components at different frequencies, depending on the recorded motion. These considerations, especially the first one, lead us to believe that the second dataset corresponds to Motion Data.
 % 
-% Consequently, our conclusions are as follows: the first dataset is related to an EMG, the second 
-% one is related to Motion Data, and the third one is related to an EEG.
-%
-% PLEASE NOTE: in the folder, in addition to the script with the calculations, comments and conclusions, 
-% we have also included screenshots of the graphs with different zoom levels.
+% Consequently, our conclusions are as follows: the first dataset is related to an EMG, the second one is related to Motion Data, and the third one is related to an EEG.
