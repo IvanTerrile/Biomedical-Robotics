@@ -1,86 +1,118 @@
-load('ES1_emg.mat');
-%asse y mV noi abbiamo questi dati asse x ms
-% Definisci le frequenze di taglio
-lowFreq = 30; % Frequenza di taglio inferiore
-highFreq = 450; % Frequenza di taglio superiore
 
-% Calcola la durata del filtro in campioni
-fs = 2000; % Frequenza di campionamento
+% Load the data from 'ES1_emg.mat'
+load('ES1_emg.mat');
+
+% Define frequency cutoffs
+lowFreq = 30; % Lower cutoff frequency
+highFreq = 450; % Upper cutoff frequency
+
+% Calculate filter length in samples
+fs = 2000; % Sampling frequency
 nyquist = fs / 2;
 lowCutoff = lowFreq / nyquist;
 highCutoff = highFreq / nyquist;
-filterOrder = 100; % Ordine del filtro
+filterOrder = 100; % Filter order
+t_signal = (0:length(Es1_emg.matrix(:,1))-1)/fs;
 
-% Creazione del filtro FIR
+% Create the FIR filter
 b = fir1(filterOrder, [lowCutoff, highCutoff]);
 
-% Applica il filtro al segnale EMG
+% Apply the filter to the EMG signal
 filteredEMG = filtfilt(b, 1, Es1_emg.matrix(:,1));
 
-% Plot del segnale EMG originale (non filtrato) in blu
+% Plot the original EMG signal (unfiltered) in blue
 figure;
-plot((0:size(Es1_emg.matrix, 1) - 1) / fs * 1000, Es1_emg.matrix(:, 1), 'b');
+plot(t_signal, Es1_emg.matrix(:, 1), 'b');
 hold on;
 
-% Plot del segnale EMG filtrato in rosso
-plot((0:size(filteredEMG, 1) - 1) / fs * 1000, filteredEMG, 'r');
+% Plot the filtered EMG signal in red
+plot(t_signal, filteredEMG, 'r');
 
-% Aggiungi etichette e titolo
-xlabel('Tempo (ms)');
-ylabel('Segnale EMG (mV)');
-title('Segnale EMG Originale vs Filtrato');
-legend('Non Filtrato', 'Filtrato');
+% Add labels and title
+xlabel('Time (ms)');
+ylabel('EMG Signal (mV)');
+title('Original vs. Filtered EMG Signal');
+legend('Unfiltered', 'Filtered');
 
 hold off;
 
-% Rettifica il segnale filteredEMG vuol dire considerare solo i valori
-% positivi dell'uscita
-segnaleRettificato = abs(filteredEMG);
+% Rectify the filtered EMG signal, meaning consider only the positive values of the output
+rectifiedSignal = abs(filteredEMG);
 
-
-
-
-envelope=lowpass(segnaleRettificato,4,2000);
-% Crea un nuovo grafico per il segnale rettificato
+% Create a new plot for the rectified signal
 figure;
-plot(segnaleRettificato);
-title('Segnale Rettificato and envelope');
-xlabel('Campione');
+plot(t_signal,rectifiedSignal);
+title('Rectified Signal and Envelope');
+xlabel('Time(ms)');
 ylabel('Amplitude');
 hold on;
-% Crea un altro grafico per l'inviluppo superiore
 
-plot(envelope ,'r');
-legend('rectified signal','envelope');
+% Create another plot for the envelope
+freq_low=4;
+freqCutOff=freq_low/nyquist;
+b_low=fir1(filterOrder,freqCutOff,'low');
+envelope = filtfilt(b_low,1,rectifiedSignal);
+plot(t_signal,envelope, 'r');
+legend('Rectified Signal', 'Envelope');
 hold off;
 
-fmax=450;
-newfs=2000/2;
-%newfs > 2fmax il teorema di nyquist è soddisfatto perciò si può utilizza
-%newfs per fare il down-sapling dell'envelope
-y_down_sample=downsample(envelope,2);
+% Set the maximum frequency (fmax) and calculate the new sampling frequency (newfs)
+fmax = 450;
+newfs = 2000 / 2;
 
+% Check if newfs > 2*fmax, Nyquist theorem is satisfied, so you can use newfs for downsampling the envelope
+downsampledEnvelope = downsample(envelope, 2);
 
-
-% Estrai il segnale di accelerometro - X
-accelerometer_X = Es1_emg.matrix(:, 2);  % La colonna 2 rappresenta Deltoid Accelerometer - X
-
-% Calcola il tempo in base alla frequenza di campionamento
+% Extract the accelerometer - X signal
+accelerometer_X = Es1_emg.matrix(:, 2);  % Column 2 represents Deltoid Accelerometer - X
+accelerometer_Y=Es1_emg.matrix(:,3);
+% Calculate time based on the accelerometer's sampling frequency
 N = length(accelerometer_X);
-t = (0:N-1) / fs;  % Tempo in secondi
+t = (0:N-1) / fs;  % Time in seconds
 
-% Plotta il segnale di accelerometro - X
+% Plot the accelerometer - X signal in red
 figure;
-plot(t, accelerometer_X,'r');
-title('Segnale di Accelerometro - X e movement signal');
+
+% Normalize the accelerometer signal for better visibility compared to the envelope
+t_envelope = (0:length(envelope)-1) / fs;
+plot(t_envelope, envelope, 'y');
+
+% Overlay the envelope signal in yellow
 hold on;
-plot(t,envelope,'y');
-legend('movment signal','envelope');
+scale_factor = max(envelope) / max(accelerometer_X);
+scaled_accelerometer_X = accelerometer_X * scale_factor;
+
+plot(t, scaled_accelerometer_X, 'r');
+title('Deltoid Accelerometer - X and Movement Signal');
+xlabel('Time (s)');
+ylabel('Accelerometer - X Value (scaled)');
+
+scale_factorY = max(envelope) / max(accelerometer_Y);
+scaled_accelerometer_Y = accelerometer_Y * scale_factorY;
+
+plot(t,scaled_accelerometer_Y,'b')
+% Calculate the time for the envelope signal based on its sampling frequency
+legend('Envelope Signal', 'Accelerometer - X Signal','Accelerometer - Y Signal');
 hold off;
 
-
-
-
+% Answer to Question A:
+% Down-sampling is performed after the envelope calculation to reduce the amount 
+% of data to be processed. The envelope calculation often involves 
+% the use of a transform or similar technique to extract the amplitude 
+% components of the signal. This can result in a signal with a much higher frequency 
+% compared to the original signal, especially if the EMG (electromyography) 
+% was acquired at a high sampling frequency like 2000 Hz. 
+% Down-sampling reduces the signal's sampling frequency 
+% to reduce data complexity and simplify further analysis or processing without losing necssary information.
+% 
+% Answer to Question B:
+% To determine when muscle activation commences in relation to movement,
+% it is necessary to analyze motion data overlaid with the EMG envelope signal. 
+% The onset of muscle activation may vary depending on the type of movement and 
+% the muscles involved. Analyzing overlaid data will help identify the moment 
+% when muscle activation begins in response to the movement. 
+% This can be determined by observing points where the motion signal and 
+% the EMG envelope signal shows significant variations or an increase in activity.
 
 
 
