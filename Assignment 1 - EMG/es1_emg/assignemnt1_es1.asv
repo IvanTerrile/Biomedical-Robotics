@@ -37,7 +37,14 @@ hold off;
 % positivi dell'uscita
 segnaleRettificato = abs(filteredEMG);
 
+% Grafico del segnale EMG rettificato in rosso
+figure;
+plot((0:size(segnaleRettificato, 1) - 1) / fs * 1000, segnaleRettificato, 'r');
 
+% Aggiungi etichette e titolo
+xlabel('Tempo (ms)');
+ylabel('Segnale EMG Rettificato (mV)');
+title('Segnale EMG Rettificato');
 
 
 envelope=lowpass(segnaleRettificato,4,2000);
@@ -59,24 +66,26 @@ newfs=2000/2;
 %newfs > 2fmax il teorema di nyquist è soddisfatto perciò si può utilizza
 %newfs per fare il down-sapling dell'envelope
 y_down_sample=downsample(envelope,2);
+figure;
+plot(y_down_sample);
 
 
 
 % Estrai il segnale di accelerometro - X
-accelerometer_X = Es1_emg.matrix(:, 2);  % La colonna 2 rappresenta Deltoid Accelerometer - X
+accelerometer_X = Es1_emg.matrix(2, :);  % La colonna 2 rappresenta Deltoid Accelerometer - X
 
 % Calcola il tempo in base alla frequenza di campionamento
 N = length(accelerometer_X);
-t = (0:N-1) / fs;  % Tempo in secondi
+t = (0:N-1) / Fs;  % Tempo in secondi
 
 % Plotta il segnale di accelerometro - X
 figure;
-plot(t, accelerometer_X,'r');
-title('Segnale di Accelerometro - X e movement signal');
+plot(t, accelerometer_X);
+xlabel('Tempo (s)');
+ylabel('Valore accelerometro - X');
+title('Segnale di Accelerometro - X');
 hold on;
-plot(t,envelope,'y');
-legend('movment signal','envelope');
-hold off;
+plot(envelope,'y');
 
 
 
