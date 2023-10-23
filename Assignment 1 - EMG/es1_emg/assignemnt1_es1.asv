@@ -57,10 +57,12 @@ legend('Rectified Signal', 'Envelope');
 hold off;
 
 % Set the maximum frequency (fmax) and calculate the new sampling frequency (newfs)
-fmax = 450;
-newfs = 2000 / 2;
+div_factor = 2;
+f_max = 450;
+new_fs = fs / div_factor ;
 
 % Check if newfs > 2*fmax, Nyquist theorem is satisfied, so you can use newfs for downsampling the envelope
+if new_fs > 2*
 downsampledEnvelope = downsample(envelope, 2);
 
 % Extract the accelerometer - X signal
@@ -87,9 +89,12 @@ title('Deltoid Accelerometer - X and Movement Signal');
 xlabel('Time (s)');
 ylabel('Accelerometer - X Value (scaled)');
 
+scale_factorY = max(envelope) / max(accelerometer_Y);
+scaled_accelerometer_Y = accelerometer_Y * scale_factorY;
 
-
-plot(t,accelerometer_Y,'b')
+plot(t,scaled_accelerometer_Y,'b')
+% Calculate the time for the envelope signal based on its sampling frequency
+legend('Envelope Signal', 'Accelerometer - X Signal','Accelerometer - Y Signal');
 hold off;
 
 % Answer to Question A:

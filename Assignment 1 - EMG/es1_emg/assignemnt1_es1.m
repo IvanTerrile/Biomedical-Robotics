@@ -57,11 +57,15 @@ legend('Rectified Signal', 'Envelope');
 hold off;
 
 % Set the maximum frequency (fmax) and calculate the new sampling frequency (newfs)
-fmax = 450;
-newfs = 2000 / 2;
+div_factor = 2;
+f_max = 450;
+new_fs = fs / div_factor ;
 
-% Check if newfs > 2*fmax, Nyquist theorem is satisfied, so you can use newfs for downsampling the envelope
-downsampledEnvelope = downsample(envelope, 2);
+% Check if newfs > 2*fmax, Nyquist theorem is satisfied, 
+% so you can use new_fs for downsampling the envelope
+if new_fs > 2*f_max
+    downsampledEnvelope = downsample(envelope, div_factor);
+end
 
 % Extract the accelerometer - X signal
 accelerometer_X = Es1_emg.matrix(:, 2);  % Column 2 represents Deltoid Accelerometer - X
