@@ -78,6 +78,8 @@ xlabel('Time (ms)');
 ylabel('Signal (V)');
 title('Movement Signal and Envelope');
 
+%dobbiamo cambiare la leggenda !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 %l'anticipo si vede di 100-200ms envelope parte prima
 % Answer to Question A:
 % Down-sampling is performed after the envelope calculation to reduce the amount 
