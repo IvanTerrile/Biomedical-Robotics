@@ -14,3 +14,7 @@ subplot(4,1,3);
 plot(Time,Trapezius_left);
 subplot(4,1,4);
 plot(Time,Trapezius_right);
+media_bl=mean(Biceps_left);
+media_br=mean(Biceps_right);
+media_tl=mean(Trapezius_left);
+media_tr=mean(Trapezius_right);
