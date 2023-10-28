@@ -1,20 +1,11 @@
 load('ES2_emg.mat');
-Biceps_right = ES2_emg.signals(:,1);
-Biceps_left  = ES2_emg.signals(:,2);
-Trapezius_right  = ES2_emg.signals(:,3);
-Trapezius_left  = ES2_emg.signals(:,4);
-Time = ES2_emg.time(:,1);
 %plot di ogni segnale isolato sull'asse dei tempi
 figure(1);
 subplot(4,1,1);
-plot(Time,Biceps_left);
+plot(ES2_emg.time,ES2_emg.signals(:,1));
 subplot(4,1,2);
-plot(Time,Biceps_right);
+plot(ES2_emg.time,ES2_emg.signals(:,2));
 subplot(4,1,3);
-plot(Time,Trapezius_left);
+plot(ES2_emg.time,ES2_emg.signals(:,3));
 subplot(4,1,4);
-plot(Time,Trapezius_right);
-media_bl=mean(Biceps_left);
-media_br=mean(Biceps_right);
-media_tl=mean(Trapezius_left);
-media_tr=mean(Trapezius_right);
+plot(ES2_emg.time,ES2_emg.signals(:,4));
