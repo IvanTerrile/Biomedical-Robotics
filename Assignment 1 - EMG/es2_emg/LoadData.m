@@ -19,3 +19,8 @@ angolo_rad = deg2rad(angolo);
 % Matrice di rotazione 2D
 R = [cos(angolo_rad), -sin(angolo_rad) 0; sin(angolo_rad), cos(angolo_rad) 0; 0 0 1];
 
+vel_br=out.Bicipe_right_vel;
+vel_bl=out.Bicipe_left_vel;
+vel_tr=out.Trapezius_Right_vel;
+vel_tl=out.Trapezius_Left_vel;
+
