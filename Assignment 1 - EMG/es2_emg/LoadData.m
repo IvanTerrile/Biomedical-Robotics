@@ -30,9 +30,3 @@ angle_rad = deg2rad(angle);
 R = [cos(angle_rad), -sin(angle_rad),  0; 
      sin(angle_rad),  cos(angle_rad),  0; 
                   0,               0,  1];
-
-% Velocity data for different muscles
-vel_br = out.Bicep_right_vel;
-vel_bl = out.Bicep_left_vel;
-vel_tr = out.Trapezius_Right_vel;
-vel_tl = out.Trapezius_Left_vel;
