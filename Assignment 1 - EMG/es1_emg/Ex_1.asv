@@ -33,7 +33,7 @@ div_factor = 2;
 f_max = 450;
 new_fs = fs / div_factor ;
 
-% Check if newfs > 2*fmax, Nyquist theorem is satisfied, 
+% Check if new_fs > 2*fmax, Nyquist theorem is satisfied, 
 % so you can use new_fs for downsampling the envelope
 if new_fs > 2*f_max
     downsampledEnvelope = downsample(envelope, div_factor);
@@ -57,7 +57,7 @@ subplot(3, 1, 1);
 plot(t_signal, Es1_emg.matrix(:, 1), 'b', t_signal, filteredEMG, 'r');
 xlabel('Time (ms)');
 ylabel('EMG Signal (mV)');
-title('Original vs. Filtered EMG Signal');
+title('Original and Filtered EMG Signal');
 legend('Unfiltered', 'Filtered');
 
 % Second subplot (3 rows, 1 column, second plot)
@@ -66,32 +66,15 @@ plot(t_signal, rectifiedSignal, t_signal, envelope, 'r');
 legend('Rectified Signal', 'Envelope');
 title('Rectified Signal and Envelope');
 xlabel('Time(ms)');
-ylabel('Amplitude');
+ylabel('Signal(mV)');
 
 % Third subplot (3 rows, 1 column, third plot)
 subplot(3, 1, 3);
 plot(t_signal,  norm_acceleration-1.05, 'r', t_envelope, normalized_envelope, 'b');
 legend( 'Norm of acceleration','Envelope');
 xlabel('Time (ms)');
-ylabel('Signal (V)');
+ylabel('Signal');
 title('Movement Signal and Envelope');
 
 
-% Answer to Question A:
-% Down-sampling is performed after the envelope calculation to reduce the amount 
-% of data to be processed. The envelope calculation often involves 
-% the use of a transform or similar technique to extract the amplitude 
-% components of the signal. This can result in a signal with a much higher frequency 
-% compared to the original signal, especially if the EMG (electromyography) 
-% was acquired at a high sampling frequency like 2000 Hz. 
-% Down-sampling reduces the signal's sampling frequency 
-% to reduce data complexity and simplify further analysis or processing without losing necessary information.
-% 
-% Answer to Question B:
-% To determine when muscle activation commences in relation to movement,
-% it is necessary to analyze motion data overlaid with the EMG envelope signal. 
-% The onset of muscle activation may vary depending on the type of movement and 
-% the muscles involved. Analyzing overlaid data will help identify the moment 
-% when muscle activation begins in response to the movement. 
-% This can be determined by observing points where the motion signal and 
-% the EMG envelope signal shows significant variations or an increase in activity.
+
