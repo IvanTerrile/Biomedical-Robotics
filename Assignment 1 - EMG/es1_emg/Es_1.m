@@ -39,13 +39,11 @@ if new_fs > 2*f_max
     downsampledEnvelope = downsample(envelope, div_factor);
 end
 
+% Extract accelerometer data and compute the norm of acceleration
 matrix_accelerometer = Es1_emg.matrix(:, 2:4);
 norm_acceleration = sqrt((matrix_accelerometer(:,1).^2)+(matrix_accelerometer(:,2).^2)+(matrix_accelerometer(:,3).^2));
-% Initialize a vector of zeros for norms
 
-%sqrt(x.^2+y.^2+z.^2)
-%normalizzare inviluppo dividere ciascun valore dell'inviluppo per il max
-%dell'inviluppo
+% Normalize the envelope 
 normalized_envelope = envelope/max(envelope) ;
 
 % Normalize the accelerometer signal for better visibility compared to the envelope
@@ -78,9 +76,7 @@ xlabel('Time (ms)');
 ylabel('Signal (V)');
 title('Movement Signal and Envelope');
 
-%dobbiamo cambiare la leggenda !!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-%l'anticipo si vede di 100-200ms envelope parte prima
 % Answer to Question A:
 % Down-sampling is performed after the envelope calculation to reduce the amount 
 % of data to be processed. The envelope calculation often involves 
