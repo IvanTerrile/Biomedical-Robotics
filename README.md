@@ -13,7 +13,8 @@ This repository is dedicated to storing and sharing the projects completed durin
 
 ## Introduction
 
-Welcome to the Biomedical Robotics repository! This collection of projects showcases the practical work completed by students during the Biomedical Robotics course at the University of Otranto. The projects cover various aspects of biomedical robotics, including assignments focused on electromyography (EMG), prosthetics, and phantom devices.
+Welcome to the Biomedical Robotics repository! 
+This collection of projects showcases the practical work completed by students during the Biomedical Robotics course at the University of Otranto. The projects cover various aspects of biomedical robotics, including assignments focused on electromyography (EMG), prosthetics, and phantom devices.
 
 ## Projects
 
@@ -35,8 +36,6 @@ Explanation of Assignment 3, highlighting its emphasis on phantom devices. Discu
 
 ## Contributors
 
-Meet the talented individuals who contributed to the projects:
-
-- **Davide Pisano** 
-- **Miriam Anna Ruggero** 
-- **Ivan Terrile**
+- [**Davide Pisano**](https://github.com/DavidePisano)
+- [**Miriam Anna Ruggero**](https://github.com/miryru)
+- [**Ivan Terrile**](https://github.com/Ivanterry00)
