@@ -38,4 +38,4 @@ Explanation of Assignment 3, highlighting its emphasis on phantom devices. Discu
 
 - [**Davide Pisano**](https://github.com/DavidePisano)
 - [**Miriam Anna Ruggero**](https://github.com/miryru)
-- [**Ivan Terrile**](https://github.com/Ivanterry00)
+- [**Ivan Terrile**](https://github.com/IvanTerrile)
